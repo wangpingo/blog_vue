@@ -1,13 +1,16 @@
 <template>
     <div class="m-header">
         <div class="top-header">
-            <span>{{promptInformation}}</span>
+            <span class="info">{{promptInformation}}</span>
             <div class="top-tap">
                 <span><i class="iconfont icon-wenzhang"></i>文章分类</span>
                 <span><i class="iconfont icon-jian"></i>好文推荐</span>    
                 <span><i class="iconfont icon-m-developmentCourse"></i>写作历程</span>    
                 <span><i class="iconfont icon-shenghuo"></i>生活散文</span>                           
             </div>
+        </div>
+        <div class="top-nav">
+           <img src="../assets/img/waniu.gif" alt="">     
         </div>
     </div>
 </template>
@@ -50,6 +53,9 @@ export default {
             position:relative;
             max-width:1200px;
         }
+        .top-header .info{
+            margin-left: 20px; 
+        }
         .top-tap{
             position:absolute;
             right:20px;
@@ -65,6 +71,16 @@ export default {
         }
         span:hover{
             color:#2f889a
+        }
+        .top-nav{
+            width: 100%;
+            height: 70px;
+            background: #fff;
+        }
+        .top-nav img{
+            margin: 5px 0 0 10px ;
+            display: inline-block;
+            height: 60px;
         }
     }
 
