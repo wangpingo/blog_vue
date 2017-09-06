@@ -5,8 +5,11 @@
 1. viewport
 2. ico
 3. store
-
-
+#### 9.5
+1. gif制作
+2. scroll事件
+#### 9.6
+1. vertical-align:middle;
 
 ## Build Setup
 
