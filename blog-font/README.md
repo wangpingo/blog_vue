@@ -10,7 +10,7 @@
 2. scroll事件
 #### 9.6
 1. vertical-align:middle;
-
+2. transition
 ## Build Setup
 
 ``` bash

@@ -21,7 +21,7 @@ export default {
 <style>
     
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: "Microsoft YaHei",Helvetical,Arial,"Luida Grande",Tahoma,sans-serif;;
   }
   body{
     background-image: url(./assets/img/bg.png);

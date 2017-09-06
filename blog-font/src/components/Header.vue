@@ -9,21 +9,26 @@
                 <span class="span-hover"><i class="iconfont icon-shenghuo"></i>生活散文</span>                           
             </div>
         </div>
-        <div class="top-nav">
+        <div class="top-nav" :class="{ topTransition:scrolledFlag}">
             <div class="nav-cont">
-                <img src="../assets/img/waniu.gif" alt="">
+                <img src="../assets/img/waniu.gif" alt=""  :class="{topTransitionImg:scrolledFlag}">
                     <!-- 这个日后可以修改成接口 -->
                 <div class="nav-class">
                     <ul class='nav-list'>
                        <span class="search"><i class="iconfont icon-sousuo"></i></span>
-                       <li @click="getSelectTap(6)" :class="{ selectClass: selectTap===6 }"><i class="iconfont icon-guanyuwomen"></i>关于博客</li>
-                       <li @click="getSelectTap(5)" :class="{ selectClass: selectTap===5 }"><i class="iconfont icon-liuyan"></i>给我留言</li>     
-                       <li @click="getSelectTap(4)" :class="{ selectClass: selectTap===4 }"><i class="iconfont icon-ziyuan"></i>资源分享</li>     
-                       <li @click="getSelectTap(3)" :class="{ selectClass: selectTap===3 }"><i class="iconfont icon-qianduanjishu"></i>技能学习</li>     
-                       <li @click="getSelectTap(2)" :class="{ selectClass: selectTap===2 }"><i class="iconfont icon-jichuzhishi"></i>基础知识</li>     
-                       <li @click="getSelectTap(1)" :class="{ selectClass: selectTap===1 }"><i class="iconfont icon-shouye"></i>首页</li>
+                       <li @click="getSelectTap(6)" :class="{ 'selectClass': selectTap===6,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-guanyuwomen"></i>关于博客</li>
+                       <li @click="getSelectTap(5)" :class="{ 'selectClass': selectTap===5,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-liuyan"></i>给我留言</li>     
+                       <li @click="getSelectTap(4)" :class="{ 'selectClass': selectTap===4,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-ziyuan"></i>资源分享</li>     
+                       <li @click="getSelectTap(3)" :class="{ 'selectClass': selectTap===3,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-qianduanjishu"></i>技能学习</li>     
+                       <li @click="getSelectTap(2)" :class="{ 'selectClass': selectTap===2,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-jichuzhishi"></i>基础知识</li>     
+                       <li @click="getSelectTap(1)" :class="{ 'selectClass': selectTap===1,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-shouye"></i>首页</li>
                     </ul>
-                </div>    
+                </div> 
+                <!-- 移动端的显示状态 -->
+                <div class="nav-mList">
+                    <span class="goSide"><i class="iconfont icon-santiaogang"></i></span>
+                    <span class="search"><i class="iconfont icon-sousuo"></i></span>
+                </div>   
             </div>  
         </div>
     </div>
@@ -70,6 +75,27 @@ export default {
 </script>
 
 <style scoped>
+
+    .top-nav{
+        width: 100%;
+        height: 70px;
+        background: #fff;
+    }
+    .topTransition{
+        position: fixed;
+        top:0;
+        background-color:rgba(255, 251, 240,0.6);
+
+    }
+    .top-nav .nav-cont{
+        max-width:1200px;
+        margin:0 auto;
+    }
+    .top-nav img{
+        margin: 5px 0 0 10px ;
+        display: inline-block;
+        height: 60px;
+    }
     @media screen and (min-width:900px) {
         .m-header .top-header{
             margin:0 auto;
@@ -103,30 +129,18 @@ export default {
         .span-hover:hover{
             color:#2f889a
         }
-        .top-nav{
-            width: 100%;
-            height: 70px;
-            background: #fff;
-        }
-        .top-nav .nav-cont{
-            max-width:1200px;
-            margin:0 auto;
-        }
-        .top-nav img{
-            margin: 5px 0 0 10px ;
-            display: inline-block;
-            height: 60px;
-        }
         .top-nav .nav-class{
             height:70px;
             float:right;
         }
         .top-nav li{
             float:right;
-            padding:0 10px;
+            padding:0 15px;
             height:70px;
             line-height:70px;
             font-size:14px;
+            transition: 1s;
+            transition-duration: 1s;
         }
         .top-nav li:hover{
             background:#666;
@@ -155,11 +169,37 @@ export default {
             font-size:12px;
             color:#FFF;
         }
+        .nav-mList{
+            display:none;
+        }
+        .topTransitionLi{
+            padding:0 10px;
+        }
     }
 
     @media screen and (max-width:899px) {
         .m-header .top-header{
             display:none;
+        }
+       .top-nav{
+            width: 100%;
+            height: 40px;
+            background: #fff;
+        }
+        .top-nav img{
+            height: 30px;
+        }
+        .nav-class{
+            display: none;
+        }
+        .nav-mList{
+            float:right;
+            height:40px;
+        }
+        .goSide,.search{
+            display:inline-block;
+            line-height:40px;
+            margin-right:18px;
         }
     }
 
