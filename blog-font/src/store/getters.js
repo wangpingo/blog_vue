@@ -40,7 +40,7 @@ export const helloInfo = state => {
     }                
   }
   if(hour < 6){str="凌晨好！"} 
-  else if (hour < 9) {str="早上好！"} 
+  else if (hour < +9) {str="早上好！"} 
   else if (hour < 12){str="上午好！ "} 
   else if (hour < 14){str="中午好！ "} 
   else if (hour < 17){str="下午好！ "} 
