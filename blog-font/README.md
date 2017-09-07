@@ -1,6 +1,7 @@
 # blog-font
 
-> blog的前端显示页面
+> blog的前端显示页面 
+## 记录遇到的困惑的写完网站之后再利用blog来进行分享
 #### 9.4号
 1. viewport
 2. ico
@@ -24,6 +25,10 @@
             }
         },
 4. font-size(设置移动端)
+
+### 9.7
+
+1. <div>图标字体</div> left top 
 ## Build Setup
 
 ``` bash
