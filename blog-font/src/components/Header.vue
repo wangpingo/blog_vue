@@ -35,7 +35,7 @@
                         <input class="inputContent" @blur="changeInput($event)" @focus="changeInput($event)" placeholder="请输入关键字查询">
                         <span  class="inputButton">站内搜索</span>
                     </div>
-
+                    <a class="closeButton" @click="showSearch"><i class="iconfont icon-guanbi"></i></a>
                 </div>   
             </div>  
         </div>
@@ -51,7 +51,7 @@ export default {
     data () {
         return {
             scrolledFlag:false,  // 控制导航栏的吸附效果
-            searchInput:false,   //搜索框
+            searchInput:true,   //搜索框
         }
     },
 
@@ -84,7 +84,13 @@ export default {
         },
         showSearch(){
             this.searchInput=!this.searchInput;
-            this.searchInput===true?this.$refs.searchAera.style.display='none':this.$refs.searchAera.style.display='block';
+            if(this.searchInput===true){
+                this.$refs.searchAera.style.opacity='0';
+                this.$refs.searchAera.style.height='0';
+            }else{
+                this.$refs.searchAera.style.height='39px';
+                this.$refs.searchAera.style.opacity='1';
+            }
         },
         changeInput(e){
             if(e.target.style.background===''){
@@ -110,13 +116,17 @@ export default {
     .topTransition{
         position: fixed;
         top:0;
-        background-color:rgba(255, 255, 255,0.5);
+        background:rgba(255, 255, 255,0.5);
     }
     .searchInput{
         position:relative;
         top:20px;
         max-width:1200px;
-        padding:10px 20px;
+        transition: 1s;
+        height:0;
+        transition-duration: 0.5s;
+        padding:16px 25px 10px 25px;
+        opacity: 0;
         background:#fff;
         box-shadow:rgb(0,0,0) 0 0 15px;
         background-color:rgba(255, 255, 255,0.5);
@@ -127,7 +137,7 @@ export default {
     .inputContent{
         display:block;
         flex:2.3;
-        height:37px;
+        height:30px;
         font-size:14px;
         border:1px solid #ccc;
         border-radius:2px 0 0 2px;
@@ -140,7 +150,7 @@ export default {
         display:block;
         flex:1;
         text-align:center;
-        line-height:37px;
+        line-height:30px;
         background:#2f889a;
         font-size:14px;
         color:#fff;
@@ -154,6 +164,21 @@ export default {
         margin: 5px 0 0 10px ;
         display: inline-block;
         height: 60px;
+    }
+    .closeButton{
+        position: absolute;
+        display: block;
+        right: 0;
+        top:0;
+        padding:5px;
+        background: #cf0000;
+        border-radius: 2px;
+    }
+
+    .icon-guanbi{
+        font-size: 12px;
+        display: inline-block;
+        color: #fff;
     }
     @media screen and (min-width:900px) {
         .m-header .top-header{
@@ -240,8 +265,10 @@ export default {
         }
        .top-nav{
             width: 100%;
-            height: 40px;
-            background: #fff;
+            height: 47px;
+            background: rgba(255,255,255,0.9);
+            border-bottom: 1px solid #ccc;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.15);       
         }
         .top-nav img{
             height: 30px;
@@ -251,7 +278,7 @@ export default {
         }
         .nav-mList{
             float:right;
-            height:40px;
+            height:47px;
         }
         .goSide,.search{
             display:inline-block;

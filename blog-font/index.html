@@ -34,4 +34,18 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script>
+      var box=document.documentElement;
+      var rootFontSize = 14;
+
+      setRootFontSize()
+      window.onresize=setRootFontSize;
+
+      function setRootFontSize(){
+        var rect = box.getBoundingClientRect();
+        console.log(rect);
+        rootFontSize = rect.width*100/750;
+        box.style.fontSize = rootFontSize + 'px';
+      }
+  </script>
 </html>
