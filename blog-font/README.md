@@ -11,6 +11,19 @@
 #### 9.6
 1. vertical-align:middle;
 2. transition
+
+### 9.7
+1. flex
+2. 搜索框奇怪的操作    <div class="flex"></div> </div><div><div class="flex"></div></div>
+3.     changeInput(e){      //改变input选框背景色 ---错误
+            let ref=e.target.style.background;
+            if(ref===''){
+              ref="#fff";
+            }else{
+                ref="";
+            }
+        },
+
 ## Build Setup
 
 ``` bash

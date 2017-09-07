@@ -15,22 +15,31 @@
                     <!-- 这个日后可以修改成接口 -->
                 <div class="nav-class">
                     <ul class='nav-list'>
-                       <span class="search"><i class="iconfont icon-sousuo"></i></span>
-                       <li @click="getSelectTap(6)" :class="{ 'selectClass': selectTap===6,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-guanyuwomen"></i>关于博客</li>
-                       <li @click="getSelectTap(5)" :class="{ 'selectClass': selectTap===5,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-liuyan"></i>给我留言</li>     
-                       <li @click="getSelectTap(4)" :class="{ 'selectClass': selectTap===4,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-ziyuan"></i>资源分享</li>     
-                       <li @click="getSelectTap(3)" :class="{ 'selectClass': selectTap===3,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-qianduanjishu"></i>技能学习</li>     
-                       <li @click="getSelectTap(2)" :class="{ 'selectClass': selectTap===2,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-jichuzhishi"></i>基础知识</li>     
-                       <li @click="getSelectTap(1)" :class="{ 'selectClass': selectTap===1,'topTransitionLi':scrolledFlag }"><i class="iconfont icon-shouye"></i>首页</li>
+                       <span class="search" @click="showSearch"><i class="iconfont icon-sousuo"></i></span>
+                       <li @click="getSelectTap(6)" :class="{ 'selectClass': selectTap===6}" :style="topTransitionLi"><i class="iconfont icon-guanyuwomen"></i>关于博客</li>
+                       <li @click="getSelectTap(5)" :class="{ 'selectClass': selectTap===5}" :style="topTransitionLi"><i class="iconfont icon-liuyan"></i>给我留言</li>     
+                       <li @click="getSelectTap(4)" :class="{ 'selectClass': selectTap===4}" :style="topTransitionLi"><i class="iconfont icon-ziyuan"></i>资源分享</li>     
+                       <li @click="getSelectTap(3)" :class="{ 'selectClass': selectTap===3}" :style="topTransitionLi"><i class="iconfont icon-qianduanjishu"></i>技术学习</li>     
+                       <li @click="getSelectTap(2)" :class="{ 'selectClass': selectTap===2}" :style="topTransitionLi"><i class="iconfont icon-jichuzhishi"></i>计算机基础</li>     
+                       <li @click="getSelectTap(1)" :class="{ 'selectClass': selectTap===1}" :style="topTransitionLi"><i class="iconfont icon-shouye"></i>首页</li>
                     </ul>
                 </div> 
                 <!-- 移动端的显示状态 -->
                 <div class="nav-mList">
                     <span class="goSide"><i class="iconfont icon-santiaogang"></i></span>
-                    <span class="search"><i class="iconfont icon-sousuo"></i></span>
+                    <span class="search" @click="showSearch"><i class="iconfont icon-sousuo"></i></span>
+                </div>
+
+                <div class="searchInput" ref="searchAera">
+                    <div class="flex-item">
+                        <input class="inputContent" @blur="changeInput($event)" @focus="changeInput($event)" placeholder="请输入关键字查询">
+                        <span  class="inputButton">站内搜索</span>
+                    </div>
+
                 </div>   
             </div>  
         </div>
+
     </div>
 </template>
 
@@ -41,7 +50,8 @@ export default {
     name: 'Header',
     data () {
         return {
-            scrolledFlag:false, // 控制导航栏的吸附效果
+            scrolledFlag:false,  // 控制导航栏的吸附效果
+            searchInput:false,   //搜索框
         }
     },
 
@@ -52,7 +62,12 @@ export default {
         }),
         ...mapGetters({
              promptInformation: 'helloInfo'
-        })
+        }),
+        topTransitionLi:function () {
+            return{
+                marginLeft:( this.scrolledFlag==true?'10px':'0px')
+            }
+        }
     },
     methods:{
         ...mapActions([
@@ -66,7 +81,18 @@ export default {
             }else{
                 this.scrolledFlag = false;
             }
-        }
+        },
+        showSearch(){
+            this.searchInput=!this.searchInput;
+            this.searchInput===true?this.$refs.searchAera.style.display='none':this.$refs.searchAera.style.display='block';
+        },
+        changeInput(e){
+            if(e.target.style.background===''){
+              e.target.style.background="#fff";
+            }else{
+                e.target.style.background="";
+            }
+        },
     },
     mounted() {
         window.addEventListener('scroll', this.handleScroll);
@@ -84,8 +110,41 @@ export default {
     .topTransition{
         position: fixed;
         top:0;
-        background-color:rgba(255, 251, 240,0.6);
-
+        background-color:rgba(255, 255, 255,0.5);
+    }
+    .searchInput{
+        position:relative;
+        top:20px;
+        max-width:1200px;
+        padding:10px 20px;
+        background:#fff;
+        box-shadow:rgb(0,0,0) 0 0 15px;
+        background-color:rgba(255, 255, 255,0.5);
+    }
+    .flex-item{
+        display:flex;
+    }
+    .inputContent{
+        display:block;
+        flex:2.3;
+        height:37px;
+        font-size:14px;
+        border:1px solid #ccc;
+        border-radius:2px 0 0 2px;
+        background-color:transparent; 
+    }
+    .inputContent::selection{
+        background:#fff;
+    }
+    .inputButton{
+        display:block;
+        flex:1;
+        text-align:center;
+        line-height:37px;
+        background:#2f889a;
+        font-size:14px;
+        color:#fff;
+        border-radius:0 2px 2px 0;
     }
     .top-nav .nav-cont{
         max-width:1200px;
@@ -135,10 +194,11 @@ export default {
         }
         .top-nav li{
             float:right;
-            padding:0 15px;
+            padding:0 10px;
             height:70px;
             line-height:70px;
             font-size:14px;
+            margin-left:0px;
             transition: 1s;
             transition-duration: 1s;
         }
@@ -171,9 +231,6 @@ export default {
         }
         .nav-mList{
             display:none;
-        }
-        .topTransitionLi{
-            padding:0 10px;
         }
     }
 
