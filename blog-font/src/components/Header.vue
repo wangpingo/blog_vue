@@ -1,21 +1,24 @@
 <template>
     <div class="m-header">
-        <div class="top-header">
-            <span class="info">{{promptInformation}}</span>
-            <div class="top-tap">
-                <span class="span-hover"><i class="iconfont icon-wenzhang"></i>文章分类</span>
-                <span class="span-hover"><i class="iconfont icon-jian"></i>好文推荐</span>    
-                <span class="span-hover"><i class="iconfont icon-m-developmentCourse"></i>写作历程</span>    
-                <span class="span-hover"><i class="iconfont icon-shenghuo"></i>生活散文</span>                           
-            </div>
+        <div style="background:#e7e7e7;">
+            <div class="top-header">
+                    <span class="info">{{promptInformation}}</span>
+                        <div class="top-tap">
+                            <span class="span-hover"><i class="iconfont icon-wenzhang"></i>文章分类</span>
+                            <span class="span-hover"><i class="iconfont icon-jian"></i>好文推荐</span>    
+                            <span class="span-hover"><i class="iconfont icon-m-developmentCourse"></i>写作历程</span>    
+                            <span class="span-hover"><i class="iconfont icon-shenghuo"></i>生活散文</span>                           
+                        </div>
+            </div> 
         </div>
+        
         <div class="top-nav" :class="{ topTransition:scrolledFlag}">
             <div class="nav-cont">
                 <img src="../assets/img/waniu.gif" alt=""  :class="{topTransitionImg:scrolledFlag}">
                     <!-- 这个日后可以修改成接口 -->
                 <div class="nav-class">
                     <ul class='nav-list'>
-                       <span class="search" @click="showSearch"><i class="iconfont icon-sousuo"></i></span>
+                       <span class="search" @click="showSearch" style="margin-right:20px"><i class="iconfont icon-sousuo"></i></span>
                        <li @click="getSelectTap(6)" :class="{ 'selectClass': selectTap===6}" :style="topTransitionLi"><i class="iconfont icon-guanyuwomen"></i>关于博客</li>
                        <li @click="getSelectTap(5)" :class="{ 'selectClass': selectTap===5}" :style="topTransitionLi"><i class="iconfont icon-liuyan"></i>给我留言</li>     
                        <li @click="getSelectTap(4)" :class="{ 'selectClass': selectTap===4}" :style="topTransitionLi"><i class="iconfont icon-ziyuan"></i>资源分享</li>     
@@ -26,16 +29,24 @@
                 </div> 
                 <!-- 移动端的显示状态 -->
                 <div class="nav-mList">
-                    <span class="goSide"><i class="iconfont icon-santiaogang"></i></span>
+                    <span class="goSide" @click="showSide"><i class="iconfont icon-santiaogang"></i></span>
                     <span class="search" @click="showSearch"><i class="iconfont icon-sousuo"></i></span>
                 </div>
-
                 <div class="searchInput" ref="searchAera">
                     <div class="flex-item">
                         <input class="inputContent" @blur="changeInput($event)" @focus="changeInput($event)" placeholder="请输入关键字查询">
                         <span  class="inputButton">站内搜索</span>
                     </div>
                     <a class="closeButton" @click="showSearch"><i class="iconfont icon-guanbi"></i></a>
+                </div>
+                <div class="leftSide" ref="leftSide">
+                    <a style="text-align:center" @click="showSide"><i class="iconfont icon-guanbi"></i></a>
+                    <a>首页</a>
+                    <a>计算机基础</a>
+                    <a>技术学习</a>
+                    <a>资源分享</a>
+                    <a>给我留言</a>
+                    <a>关于博客</a>
                 </div>   
             </div>  
         </div>
@@ -52,6 +63,7 @@ export default {
         return {
             scrolledFlag:false,  // 控制导航栏的吸附效果
             searchInput:true,   //搜索框
+            showSideFlag:false
         }
     },
 
@@ -99,6 +111,10 @@ export default {
                 e.target.style.background="";
             }
         },
+        showSide(){
+            this.showSideFlag=!this.showSideFlag;
+            this.showSideFlag===true?this.$refs.leftSide.style.left="0":this.$refs.leftSide.style.left="-60%";
+        }
     },
     mounted() {
         window.addEventListener('scroll', this.handleScroll);
@@ -107,7 +123,23 @@ export default {
 </script>
 
 <style scoped>
+    .leftSide{
+        position: fixed;
+        top:48px;
+        transition: .5s;
+        left: -60%;
+        bottom: 0;
+        width: 60%;
+        background: none repeat scroll 0 0 rgba(51,51,51,0.8);
+    }
 
+    .leftSide a{
+        display: block;
+        color: #f8f8f8;
+        padding: 10px 20px;
+        border-bottom: 1px solid #777;
+        font-size: 16px;
+    }
     .top-nav{
         width: 100%;
         height: 70px;
@@ -116,11 +148,10 @@ export default {
     .topTransition{
         position: fixed;
         top:0;
-        background:rgba(255, 255, 255,0.5);
+        background:rgba(255, 255, 255,0.8);
     }
     .searchInput{
-        position:relative;
-        top:20px;
+        position:relative;;
         max-width:1200px;
         transition: 1s;
         height:0;
@@ -129,7 +160,7 @@ export default {
         opacity: 0;
         background:#fff;
         box-shadow:rgb(0,0,0) 0 0 15px;
-        background-color:rgba(255, 255, 255,0.5);
+
     }
     .flex-item{
         display:flex;
@@ -141,7 +172,7 @@ export default {
         font-size:14px;
         border:1px solid #ccc;
         border-radius:2px 0 0 2px;
-        background-color:transparent; 
+        background: #ebebeb;
     }
     .inputContent::selection{
         background:#fff;
@@ -170,7 +201,8 @@ export default {
         display: block;
         right: 0;
         top:0;
-        padding:5px;
+        padding:4px;
+        width: 12px;
         background: #cf0000;
         border-radius: 2px;
     }
@@ -178,17 +210,21 @@ export default {
     .icon-guanbi{
         font-size: 12px;
         display: inline-block;
+        width: 12px;
+        height: 12px;
         color: #fff;
     }
     @media screen and (min-width:900px) {
         .m-header .top-header{
             margin:0 auto;
             height:40px;
-            background:#e7e7e7;
             line-height:40px;
             font-size:14px;
             position:relative;
             max-width:1200px;
+        }
+        .leftSSide{
+            display: none;
         }
         .top-header .info{
             margin-left: 20px; 

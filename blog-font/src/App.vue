@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="height:2000px">
+  <div id="app">
     <m-header></m-header>
     <router-view></router-view>
   </div>
@@ -25,5 +25,5 @@ export default {
   }
   body{
     background-image: url(./assets/img/bg.png);
-  }
+  } 
 </style>
