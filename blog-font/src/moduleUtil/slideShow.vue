@@ -26,7 +26,7 @@
         data(){
             return{
                 showFlag:false,
-                currentImg:4,
+                currentImg:0,
                 interval:null
             }
         },
@@ -42,10 +42,13 @@
             },
             switch(){
                 // console.log(111);
-                console.log(this.$refs)
+                this.currentImg==4?this.currentImg=0:this.currentImg+=1;
+                // let imageScroll=this.$refs.imageScroll
+                // console.log(imageScroll);                
+                // debugger;
             },
             bindScroll(){
-                this.interval=setInterval(this.switch,2000)
+                // this.interval=setInterval(this.switch,2000)
             },
             clearScroll(){
                 clearInterval(this.interval);
