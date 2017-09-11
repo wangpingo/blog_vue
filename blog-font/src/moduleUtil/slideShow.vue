@@ -1,22 +1,22 @@
 <template>
-        <div class="content" @mouseover="shoeSlide" @mouseout="hideSlide">
+        <div class="content" @mouseover="hideSlide" @mouseout="showSlide">
             <ul ref="imageScroll">
-                <li><img src="../assets/img/1.jpg" :class="{active:currentImg==0}"></li>
-                <li><img src="../assets/img/2.jpg" :class="{active:currentImg==1}"></li>
-                <li><img src="../assets/img/3.jpg" :class="{active:currentImg==2}"></li>
-                <li><img src="../assets/img/4.jpg" :class="{active:currentImg==3}"></li>
-                <li><img src="../assets/img/5.jpg" :class="{active:currentImg==4}"></li>
+                <li :class="{active:currentImg==0}"><img src="../assets/img/1.jpg" ></li>
+                <li :class="{active:currentImg==1}"><img src="../assets/img/2.jpg" ></li>
+                <li :class="{active:currentImg==2}"><img src="../assets/img/3.jpg" ></li>
+                <li :class="{active:currentImg==3}"><img src="../assets/img/4.jpg" ></li>
+                <li :class="{active:currentImg==4}"><img src="../assets/img/5.jpg" ></li>
             </ul>
             
             <a class="next" ref="arrowLeft"><i class="iconfont icon-rightarrowsmall"></i></a>
             <a class="prev"  ref="arrowRight"><i class="iconfont icon-zuoyoujiantou-copy-copy"></i></a>
             <span class="textCoding">两弯似蹙非蹙笼烟眉，一双似喜非喜含情目。</span>
-            <div class="selectButton">
-                <span class="circle"></span>
-                <span class="circle"></span>
-                <span class="circle"></span>
-                <span class="circle"></span>
-                <span class="circle"></span>
+            <div class="selectButton" >
+                <span class="circle" :class="{specialClass:currentImg==0}"></span>
+                <span class="circle" :class="{specialClass:currentImg==1}"></span>
+                <span class="circle" :class="{specialClass:currentImg==2}"></span>
+                <span class="circle" :class="{specialClass:currentImg==3}"></span>
+                <span class="circle" :class="{specialClass:currentImg==4}"></span>
             </div>
         </div>
 </template>
@@ -31,31 +31,31 @@
             }
         },
         methods:{
-            shoeSlide(){
+            showSlide(){
                 this.$refs.arrowLeft.style.opacity="1";
                 this.$refs.arrowRight.style.opacity="1";
+                this.bindScroll();
+               
             },
             hideSlide(){
-                this.$refs.arrowLeft.style.opacity="0";
-
-               this.$refs.arrowRight.style.opacity="0"; 
+                this.$refs.arrowLeft.style.opacity="1";
+                this.$refs.arrowRight.style.opacity="1"; 
+                this.clearScroll();
             },
             switch(){
                 // console.log(111);
                 this.currentImg==4?this.currentImg=0:this.currentImg+=1;
-                // let imageScroll=this.$refs.imageScroll
-                // console.log(imageScroll);                
-                // debugger;
+
             },
             bindScroll(){
-                // this.interval=setInterval(this.switch,2000)
+                this.interval=setInterval(this.switch,2000)
             },
             clearScroll(){
                 clearInterval(this.interval);
             }
         },
         created(){
-           this.bindScroll();
+        //    this.bindScroll();
         },
         destroyed(){
             this.clearScroll();
@@ -72,18 +72,39 @@
         position: relative;
         height: auto;
     }
+
+    ul{
+        overflow: hidden;
+        width: 100%;
+        display: block;
+        height: auto;
+    }
+
+    li{
+        width: 100%;
+        left: 0;
+        top: 0;
+        display: block;
+        float: none;
+        position: absolute;
+        /* opacity: 0; */
+        z-index: 1;
+        transition: opacity 800ms ease-in-out;
+    }
     .active{
-        display: inline-block;
+        opacity: 1;
     }
     img{
-        width: 100%;
+        display: block;
         height: auto;
-        display: none;
+        width: 100%;
+        margin: 0 auto;
     }
     .prev,.next{
         transition: .5s;
         display: inline-block;
         position: absolute;
+        opacity: 1;
         top:50%;
         margin-top:-25px;
         height: 50px;
@@ -106,14 +127,12 @@
         font-size: 30px;
     }
     .icon-rightarrowsmall{
-        
         top:50%;
         left: 50%;
         margin-left: -15px;
         margin-top: -16px;
     }
     .icon-zuoyoujiantou-copy-copy{
-
         font-size: 35px;    
         top:50%;
         left: 50%;
@@ -154,5 +173,9 @@
     .circle:hover{
         background: #2f889a;
         border: 1px solid #2f889a;
+    }
+    .specialClass{
+        background-color: #2F889A;
+        border: 1px solid #2F889A;
     }
 </style>
