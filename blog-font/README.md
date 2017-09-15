@@ -29,14 +29,25 @@
 ### 9.7
 
 1. <div>图标字体</div> left top 
-2. fetch
-3. css 引入问题
+2. 感伤 像我这样的人
+3. mediaScreen位置
+4. vueComponents  name属性
+5. scroped 可不可以帮我们消除双边距合并
+
+### 9.8
+1.   .active{
+        display: inline-block;
+    }
+    img{
+        width: 100%;
+        height: auto;
+        display: none;
+    }
 
 
-
-
-
-
+### 9.10
+1. img auto
+2. 父元素失去高度s
 
 
 
